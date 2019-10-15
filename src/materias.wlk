@@ -48,6 +48,7 @@ class Estudiante{
 	
 	method puedeInscribirseMateria(materia){
 		return self.aprobadoLaMateria(materia) 
+		and self.estaEnMateria(materia)
 		and self.alumnoEstaInscripto(materia)
 		and self.materiaRequisitos(materia)
 			
@@ -70,9 +71,11 @@ class Estudiante{
 		return not carreras.any(materia)
 	}
 	method materiaRequisitos(materia){
-		return carreras.forEach({aprob => aprob.estaAprobado(materia)})
+		return carreras.all({aprob => aprob.estaAprobado(materia)})
 	}
-	
+	method estaEnMateria(materia){
+		return carreras.contains(materia)
+	}
 	
 	
 	
